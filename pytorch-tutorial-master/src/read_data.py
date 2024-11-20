@@ -11,11 +11,17 @@ writer = SummaryWriter("logs")
 class MyData(Dataset):
 
     def __init__(self, root_dir, image_dir, label_dir, transform):
+        # 根目录项目最大的文件夹
         self.root_dir = root_dir
+        # 图片地址
         self.image_dir = image_dir
+        # 标签地址
         self.label_dir = label_dir
+        # 标签路径 =  root+"label
         self.label_path = os.path.join(self.root_dir, self.label_dir)
+        # 图片路径 =  root+"image"，，不需要明确告诉 os.path.join() 分隔符号。os.path.join() 会根据当前操作系统自动处理路径分隔符。它会使用适当的分隔符：
         self.image_path = os.path.join(self.root_dir, self.image_dir)
+        # 把每一个image的地址 dir 都展开来，['']形式， list 中的各种字符串
         self.image_list = os.listdir(self.image_path)
         self.label_list = os.listdir(self.label_path)
         self.transform = transform
@@ -24,8 +30,10 @@ class MyData(Dataset):
         self.label_list.sort()
 
     def __getitem__(self, idx):
+        # 名字根据index 来获得
         img_name = self.image_list[idx]
         label_name = self.label_list[idx]
+        
         img_item_path = os.path.join(self.root_dir, self.image_dir, img_name)
         label_item_path = os.path.join(self.root_dir, self.label_dir, label_name)
         img = Image.open(img_item_path)
