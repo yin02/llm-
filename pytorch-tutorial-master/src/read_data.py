@@ -37,7 +37,7 @@ class MyData(Dataset):
         img_item_path = os.path.join(self.root_dir, self.image_dir, img_name)
         label_item_path = os.path.join(self.root_dir, self.label_dir, label_name)
         img = Image.open(img_item_path)
-
+        
         with open(label_item_path, 'r') as f:
             label = f.readline()
 
