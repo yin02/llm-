@@ -10,8 +10,23 @@ from torch.utils.tensorboard import SummaryWriter
 from torch import nn
 from torch.utils.data import DataLoader
 
+#训练数据集 和 测试数据集 本身并没有“训练好”或“未训练好”的区别
+# 。它们仅仅是数据集，用来训练和测试模型。数据集包含原始图像及其对应的标签（类别）
+# ，这些标签提供了正确的答案，用于训练和评估模型。
+
+
+
+
+
+# 训练数据集，表示加载的是训练集，这部分数据用于训练模型。
+# # 训练集包含了标签（例如，图片属于哪个类别），并且通常会用于模型的参数优化。
+# 这部分数据用于训练模型。训练集包含了标签（例如，图片属于哪个类别），
+# 并且通常会用于模型的参数优化。
 train_data = torchvision.datasets.CIFAR10(root="../data", train=True, transform=torchvision.transforms.ToTensor(),
                                           download=True)
+# 测试数据集， 是用来评估模型的表现的，在模型训练完成后使用。
+# 这部分数据用于评估模型的性能。测试集也包含标签，
+# 但是模型不会在测试集上进行训练，而是用于验证模型在未见过的数据上的表现。
 test_data = torchvision.datasets.CIFAR10(root="../data", train=False, transform=torchvision.transforms.ToTensor(),
                                          download=True)
 
@@ -19,7 +34,7 @@ test_data = torchvision.datasets.CIFAR10(root="../data", train=False, transform=
 train_data_size = len(train_data)
 test_data_size = len(test_data)
 # 如果train_data_size=10, 训练数据集的长度为：10
-print("训练数据集的长度为：{}".format(train_data_size))
+print("训练数据集的长度为：{}".format(train_data_size))#字符串格式化
 print("测试数据集的长度为：{}".format(test_data_size))
 
 
